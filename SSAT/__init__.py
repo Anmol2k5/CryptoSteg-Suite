@@ -1,0 +1,1 @@
+# SSAT Package initialization

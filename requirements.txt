@@ -1,0 +1,7 @@
+opencv-python-headless
+numpy
+PyWavelets
+cryptography
+Pillow
+Flask
+matplotlib
