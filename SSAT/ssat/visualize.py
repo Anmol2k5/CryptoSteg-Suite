@@ -99,6 +99,9 @@ DASHBOARD_HTML = """
     <title>SSAT Analytics Core</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <script src="https://unpkg.com/lucide@latest"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600;700&display=swap" rel="stylesheet">
     <script>
         tailwind.config = {
             theme: {
@@ -107,7 +110,8 @@ DASHBOARD_HTML = """
                         cyber: { 950: '#083344', 900: '#164e63', 800: '#155e75', 500: '#06b6d4', 400: '#22d3ee' }
                     },
                     fontFamily: {
-                        mono: ['Courier New', 'Courier', 'monospace', 'sans-serif']
+                        sans: ['"Plus Jakarta Sans"', 'sans-serif'],
+                        mono: ['"JetBrains Mono"', 'monospace']
                     }
                 }
             }
@@ -172,81 +176,81 @@ DASHBOARD_HTML = """
         }
     </style>
 </head>
-<body class="min-h-screen bg-[#020203] text-gray-300 font-mono p-4 md:p-8 selection:bg-cyan-900 selection:text-cyan-100">
+<body class="min-h-screen bg-[#09090b] text-zinc-300 font-sans p-4 md:p-8 selection:bg-cyan-500/20 selection:text-cyan-300 antialiased">
 
-    <header class="mb-8 border-b border-[#222] pb-4 flex flex-col md:flex-row md:items-end justify-between gap-4 max-w-7xl mx-auto">
+    <header class="mb-10 border-b border-zinc-800 pb-6 flex flex-col md:flex-row md:items-center justify-between gap-6 max-w-7xl mx-auto">
         <div class="flex items-center gap-4">
-            <div class="relative flex items-center justify-center w-12 h-12 bg-cyan-950/30 border border-cyan-800 rounded-sm shadow-[0_0_15px_rgba(6,182,212,0.2)]">
-                <i data-lucide="shield-alert" class="w-6 h-6 text-cyan-400"></i>
+            <div class="relative flex items-center justify-center w-14 h-14 bg-gradient-to-br from-cyan-500/20 to-purple-500/20 border border-cyan-500/30 rounded-2xl shadow-[0_0_25px_rgba(6,182,212,0.15)]">
+                <i data-lucide="shield-alert" class="w-7 h-7 text-cyan-400"></i>
             </div>
             <div>
-                <h1 class="text-xl md:text-3xl font-bold tracking-widest text-gray-100 uppercase flex items-center gap-2">
-                    SSAT <span class="text-cyan-500 font-light">Analytics Core</span>
+                <h1 class="text-2xl md:text-4xl font-extrabold tracking-tight text-white flex items-center gap-2">
+                    SSAT <span class="text-cyan-400 font-medium">Analytics Core</span>
                 </h1>
-                <p class="text-xs text-gray-500 uppercase tracking-widest mt-1">
+                <p class="text-xs md:text-sm text-zinc-400 font-medium tracking-wide mt-1">
                     Forensic Steganalysis & Investigation Core v3.0.0
                 </p>
             </div>
         </div>
 
-        <div class="flex items-center gap-4 text-xs">
-            <div class="flex items-center gap-2 bg-[#0a0a0f] border border-[#222] px-3 py-2 rounded-sm shadow-inner">
-                <i data-lucide="server" class="w-3.5 h-3.5 text-emerald-500"></i>
-                <span class="text-gray-400">SYS_NODE:</span>
-                <span class="text-emerald-500 font-bold">127.0.0.1:5000</span>
+        <div class="flex items-center gap-4 text-xs font-mono tracking-wider">
+            <div class="flex items-center gap-2.5 bg-zinc-900/90 border border-zinc-800 px-3.5 py-2 rounded-xl shadow-sm">
+                <i data-lucide="server" class="w-4 h-4 text-emerald-400"></i>
+                <span class="text-zinc-500 font-sans">SYS_NODE:</span>
+                <span class="text-emerald-400 font-bold">127.0.0.1:5000</span>
             </div>
-            <div class="flex items-center gap-2 bg-[#0a0a0f] border border-[#222] px-3 py-2 rounded-sm shadow-inner">
-                <i data-lucide="activity" class="w-3.5 h-3.5 text-cyan-500 animate-pulse"></i>
-                <span class="text-gray-400">STATUS:</span>
-                <span class="text-cyan-500 font-bold">ONLINE</span>
+            <div class="flex items-center gap-2.5 bg-zinc-900/90 border border-zinc-800 px-3.5 py-2 rounded-xl shadow-sm">
+                <i data-lucide="activity" class="w-4 h-4 text-cyan-400 animate-pulse"></i>
+                <span class="text-zinc-500 font-sans">STATUS:</span>
+                <span class="text-cyan-400 font-bold">ONLINE</span>
             </div>
         </div>
     </header>
 
     <div class="max-w-7xl mx-auto space-y-8">
 
-        <div class="bg-[#0a0a0f] border border-cyan-950 rounded-sm shadow-xl overflow-hidden transition-all duration-300">
-            <button onclick="toggleGuide()" class="w-full bg-[#111] hover:bg-[#151520] px-6 py-4 flex items-center justify-between border-b border-[#222] transition-colors text-left cursor-pointer select-none">
+        <div class="bg-zinc-900/60 border border-zinc-800/80 backdrop-blur-sm rounded-2xl shadow-xl overflow-hidden transition-all duration-300">
+            <button onclick="toggleGuide()" class="w-full bg-zinc-900/90 hover:bg-zinc-800/50 px-6 py-4 flex items-center justify-between border-b border-zinc-800/80 transition-colors text-left cursor-pointer select-none">
                 <div class="flex items-center gap-3">
                     <i data-lucide="help-circle" class="w-5 h-5 text-cyan-400"></i>
-                    <span class="font-bold text-gray-200 uppercase tracking-wider text-sm md:text-base">
+                    <span class="font-bold text-white tracking-wide text-sm md:text-base">
                         How Steganalysis Works & What These Reports Mean (Layman's Guide)
                     </span>
                 </div>
-                <div class="flex items-center gap-2 text-xs text-cyan-400 font-mono">
+                <div class="flex items-center gap-2 text-xs text-cyan-400 font-medium tracking-wider font-mono">
                     <span>CLICK TO EXPAND / COLLAPSE</span>
                     <i data-lucide="chevron-down" id="guide-icon" class="w-4 h-4 transition-transform duration-300"></i>
                 </div>
             </button>
-            <div id="stego-guide" class="p-6 bg-[#050508] text-xs md:text-sm text-gray-400 leading-relaxed space-y-6 border-t border-[#111] hidden">
-                <p class="text-gray-300 border-l-2 border-cyan-500 pl-4 py-1">
+            <div id="stego-guide" class="p-6 md:p-8 bg-zinc-950/60 text-sm text-zinc-300 leading-relaxed space-y-6 border-t border-zinc-800/50 hidden">
+                <p class="text-zinc-200 border-l-4 border-cyan-500 pl-4 py-1 font-medium bg-cyan-500/5 rounded-r-xl pr-4">
                     When secret text is embedded into an image using LSB steganography, the human eye sees zero change. However, modifying the lowest bits leaves undeniable mathematical footprints. SSAT runs three statistical tests to uncover these secret payloads.
                 </p>
                 <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
-                    <div class="bg-[#0a0a0f] p-5 border border-[#1f1f30] rounded-sm relative overflow-hidden">
+                    <div class="bg-zinc-900/80 p-6 border border-zinc-800/80 rounded-xl relative overflow-hidden shadow-md">
                         <div class="absolute top-0 left-0 right-0 h-1 bg-red-500"></div>
-                        <h4 class="text-red-400 font-bold font-mono text-base mb-2 flex items-center gap-2">
-                            <i data-lucide="bar-chart-2" class="w-4 h-4"></i> 1. Chi-Squared Test
+                        <h4 class="text-red-400 font-bold text-base mb-2 flex items-center gap-2 font-mono">
+                            <i data-lucide="bar-chart-2" class="w-5 h-5"></i> 1. Chi-Squared Test
                         </h4>
-                        <p class="text-xs text-gray-400">
+                        <p class="text-xs text-zinc-400 leading-relaxed font-sans font-medium">
                             In natural photos, color frequencies vary smoothly. When secret data is hidden in LSBs, adjacent color values become unnaturally equal. Normal images score under 100.
                         </p>
                     </div>
-                    <div class="bg-[#0a0a0f] p-5 border border-[#1f1f30] rounded-sm relative overflow-hidden">
+                    <div class="bg-zinc-900/80 p-6 border border-zinc-800/80 rounded-xl relative overflow-hidden shadow-md">
                         <div class="absolute top-0 left-0 right-0 h-1 bg-emerald-500"></div>
-                        <h4 class="text-emerald-400 font-bold font-mono text-base mb-2 flex items-center gap-2">
-                            <i data-lucide="activity" class="w-4 h-4"></i> 2. Sample Pair Analysis
+                        <h4 class="text-emerald-400 font-bold text-base mb-2 flex items-center gap-2 font-mono">
+                            <i data-lucide="activity" class="w-5 h-5"></i> 2. Sample Pair Analysis
                         </h4>
-                        <p class="text-xs text-gray-400">
+                        <p class="text-xs text-zinc-400 leading-relaxed font-sans font-medium">
                             Examines pairs of neighboring pixels. Hidden payloads inject random high-frequency noise, breaking natural correlation of lowest bit patterns.
                         </p>
                     </div>
-                    <div class="bg-[#0a0a0f] p-5 border border-[#1f1f30] rounded-sm relative overflow-hidden">
+                    <div class="bg-zinc-900/80 p-6 border border-zinc-800/80 rounded-xl relative overflow-hidden shadow-md">
                         <div class="absolute top-0 left-0 right-0 h-1 bg-purple-500"></div>
-                        <h4 class="text-purple-400 font-bold font-mono text-base mb-2 flex items-center gap-2">
-                            <i data-lucide="git-compare" class="w-4 h-4"></i> 3. RS Flipper Analysis
+                        <h4 class="text-purple-400 font-bold text-base mb-2 flex items-center gap-2 font-mono">
+                            <i data-lucide="git-compare" class="w-5 h-5"></i> 3. RS Flipper Analysis
                         </h4>
-                        <p class="text-xs text-gray-400">
+                        <p class="text-xs text-zinc-400 leading-relaxed font-sans font-medium">
                             Groups pixels and flips their LSBs using mathematical masks. Secret messages shatter the natural Regular vs Singular symmetry (RS Ratio > 0.05).
                         </p>
                     </div>
@@ -255,42 +259,42 @@ DASHBOARD_HTML = """
         </div>
 
         <!-- BATCH SURVEILLANCE MODE -->
-        <div class="bg-[#0a0a0f] border border-cyan-900/50 rounded-sm flex flex-col overflow-hidden relative shadow-2xl">
-            <div class="bg-[#111] border-b border-[#222] px-4 py-2.5 flex items-center justify-between select-none">
-                <div class="flex items-center gap-2 text-cyan-400 text-xs font-mono tracking-wider uppercase">
-                    <i data-lucide="folder-search" class="w-4 h-4"></i>
+        <div class="bg-zinc-900/60 border border-cyan-500/30 rounded-2xl flex flex-col overflow-hidden relative shadow-2xl backdrop-blur-sm">
+            <div class="bg-zinc-900/90 border-b border-zinc-800/80 px-6 py-4 flex items-center justify-between select-none font-mono">
+                <div class="flex items-center gap-2.5 text-cyan-400 font-bold tracking-wide uppercase text-sm font-sans">
+                    <i data-lucide="folder-search" class="w-5 h-5 text-cyan-400"></i>
                     Batch Surveillance Mode (10-50 Images)
                 </div>
-                <div class="flex gap-1.5">
-                    <div class="w-2.5 h-2.5 rounded-full bg-cyan-900/50"></div>
-                    <div class="w-2.5 h-2.5 rounded-full bg-cyan-900/50"></div>
-                    <div class="w-2.5 h-2.5 rounded-full bg-cyan-900/50"></div>
+                <div class="flex gap-2">
+                    <div class="w-3 h-3 rounded-full bg-cyan-500/40"></div>
+                    <div class="w-3 h-3 rounded-full bg-cyan-500/40"></div>
+                    <div class="w-3 h-3 rounded-full bg-cyan-500/40"></div>
                 </div>
             </div>
-            <div class="p-8">
+            <div class="p-8 md:p-10">
                 <form action="/batch" method="post" enctype="multipart/form-data" onsubmit="showBatchProgress()" class="space-y-6">
-                    <div class="batch-dropzone flex flex-col items-center justify-center w-full h-32 px-4 transition-all border-2 border-dashed border-cyan-800/40 rounded-sm bg-[#050508] hover:bg-[#0a0a12] hover:border-cyan-500/60 cursor-pointer"
+                    <div class="batch-dropzone flex flex-col items-center justify-center w-full h-40 px-6 transition-all border-2 border-dashed border-cyan-500/40 rounded-xl bg-zinc-950/60 hover:bg-zinc-950/90 hover:border-cyan-400 cursor-pointer shadow-inner"
                          id="batch-dropzone"
                          ondragover="event.preventDefault(); this.classList.add('dragover')"
                          ondragleave="this.classList.remove('dragover')"
                          ondrop="event.preventDefault(); this.classList.remove('dragover'); const input = document.getElementById('batch-files'); input.files = event.dataTransfer.files; updateBatchFileNames(input);">
                         <label class="flex flex-col items-center justify-center w-full h-full cursor-pointer">
-                            <div class="flex items-center gap-3 text-cyan-500">
-                                <i data-lucide="folder-up" class="w-6 h-6"></i>
-                                <span id="batch-name" class="text-xs font-bold tracking-widest uppercase">Initialize_Batch_Upload_Sequence</span>
+                            <div class="flex items-center gap-3 text-cyan-400 font-mono">
+                                <i data-lucide="folder-up" class="w-7 h-7 animate-bounce"></i>
+                                <span id="batch-name" class="text-sm md:text-base font-bold tracking-widest uppercase">Initialize_Batch_Upload_Sequence</span>
                             </div>
-                            <span class="text-[10px] text-gray-600 mt-1">Drag & drop folder contents or click to select multiple files (PNG, JPG, BMP)</span>
+                            <span class="text-xs text-zinc-500 mt-2 font-sans font-medium">Drag & drop folder contents or click to select multiple files (PNG, JPG, BMP)</span>
                             <input type="file" id="batch-files" name="images" accept="image/*" multiple required class="hidden" onchange="updateBatchFileNames(this)" />
                         </label>
                     </div>
-                    <button type="submit" class="w-full border px-8 py-3.5 uppercase tracking-widest text-xs font-bold transition-all duration-300 flex items-center justify-center gap-2 bg-cyan-950/40 text-cyan-300 border-cyan-700 hover:bg-cyan-900/70 hover:border-cyan-400 hover:shadow-[0_0_25px_rgba(6,182,212,0.3)]">
-                        <i data-lucide="scan-line" class="w-4 h-4"></i> [ RUN_BATCH_SURVEILLANCE ]
+                    <button type="submit" class="w-full border px-8 py-4 uppercase tracking-widest text-sm font-extrabold transition-all duration-300 flex items-center justify-center gap-3 bg-gradient-to-r from-cyan-500/20 to-blue-500/20 text-cyan-300 border-cyan-500/50 hover:from-cyan-500/30 hover:to-blue-500/30 hover:border-cyan-400 hover:shadow-[0_0_30px_rgba(6,182,212,0.25)] rounded-xl">
+                        <i data-lucide="scan-line" class="w-5 h-5"></i> [ RUN_BATCH_SURVEILLANCE ]
                     </button>
                 </form>
-                <div id="batch-progress" class="hidden mt-4 text-center">
-                    <div class="inline-flex items-center gap-2 text-cyan-400 text-xs animate-pulse">
-                        <i data-lucide="loader" class="w-4 h-4 animate-spin"></i>
-                        Scanning all files... Please wait.
+                <div id="batch-progress" class="hidden mt-6 text-center">
+                    <div class="inline-flex items-center gap-3 text-cyan-400 text-sm font-semibold tracking-wide animate-pulse bg-cyan-500/10 border border-cyan-500/30 px-6 py-3 rounded-full shadow-lg">
+                        <i data-lucide="loader" class="w-5 h-5 animate-spin"></i>
+                        Scanning all files... Please hold line.
                     </div>
                 </div>
             </div>
@@ -298,29 +302,29 @@ DASHBOARD_HTML = """
 
         <!-- BATCH RESULTS TABLE -->
         {% if batch_results %}
-        <div class="bg-[#050508] border border-[#222] rounded-sm overflow-hidden shadow-2xl">
-            <div class="bg-[#0a0a0f] border-b border-[#222] px-6 py-4 flex items-center justify-between flex-wrap gap-3">
+        <div class="bg-zinc-900/60 border border-zinc-800/80 rounded-2xl overflow-hidden shadow-2xl backdrop-blur-sm">
+            <div class="bg-zinc-900/90 border-b border-zinc-800 px-6 py-5 flex items-center justify-between flex-wrap gap-4">
                 <div class="flex items-center gap-3">
-                    <i data-lucide="table" class="w-5 h-5 text-cyan-500"></i>
-                    <h2 class="text-sm md:text-base uppercase tracking-widest font-bold text-gray-200">
+                    <i data-lucide="table" class="w-6 h-6 text-cyan-400"></i>
+                    <h2 class="text-base md:text-lg uppercase tracking-wider font-extrabold text-white font-mono">
                         Batch_Scan_Results.table
                     </h2>
                 </div>
                 <div class="flex items-center gap-3 flex-wrap">
-                    <span class="text-xs bg-[#111] px-3 py-1 rounded-sm border border-[#222] text-gray-400 font-mono">
+                    <span class="text-xs bg-zinc-950 px-3.5 py-1.5 rounded-lg border border-zinc-800 text-zinc-400 font-mono tracking-wider font-semibold">
                         SCANNED: <span class="text-cyan-400 font-bold">{{ batch_results|length }}</span>
                     </span>
-                    <span class="text-xs bg-[#111] px-3 py-1 rounded-sm border border-[#222] text-gray-400 font-mono">
+                    <span class="text-xs bg-zinc-950 px-3.5 py-1.5 rounded-lg border border-zinc-800 text-zinc-400 font-mono tracking-wider font-semibold">
                         CLEAN: <span class="text-emerald-400 font-bold">{{ batch_results|selectattr('verdict', 'equalto', 'CLEAN')|list|length }}</span>
                     </span>
-                    <span class="text-xs bg-[#111] px-3 py-1 rounded-sm border border-[#222] text-gray-400 font-mono">
+                    <span class="text-xs bg-zinc-950 px-3.5 py-1.5 rounded-lg border border-zinc-800 text-zinc-400 font-mono tracking-wider font-semibold">
                         SUSPICIOUS: <span class="text-yellow-400 font-bold">{{ batch_results|selectattr('verdict', 'equalto', 'SUSPICIOUS')|list|length }}</span>
                     </span>
-                    <span class="text-xs bg-[#111] px-3 py-1 rounded-sm border border-[#222] text-gray-400 font-mono">
+                    <span class="text-xs bg-zinc-950 px-3.5 py-1.5 rounded-lg border border-zinc-800 text-zinc-400 font-mono tracking-wider font-semibold">
                         INFECTED: <span class="text-red-400 font-bold">{{ batch_results|selectattr('verdict', 'equalto', 'INFECTED')|list|length }}</span>
                     </span>
-                    <a href="/pdf-report" class="inline-flex items-center gap-1.5 bg-red-950/40 border border-red-800 text-red-400 text-xs px-4 py-2 rounded-sm hover:bg-red-900/60 hover:border-red-500 hover:shadow-[0_0_15px_rgba(239,68,68,0.2)] transition-all font-bold uppercase tracking-wider">
-                        <i data-lucide="file-down" class="w-3.5 h-3.5"></i> Download Forensic PDF Report
+                    <a href="/pdf-report" class="inline-flex items-center gap-2 bg-gradient-to-r from-red-500/20 to-orange-500/20 border border-red-500/40 text-red-400 text-xs px-4 py-2 rounded-lg hover:from-red-500/30 hover:to-orange-500/30 hover:border-red-400 hover:shadow-[0_0_20px_rgba(239,68,68,0.25)] transition-all font-bold uppercase tracking-wider font-sans">
+                        <i data-lucide="file-down" class="w-4 h-4"></i> Forensic PDF Report
                     </a>
                 </div>
             </div>
@@ -328,46 +332,46 @@ DASHBOARD_HTML = """
             <div class="overflow-x-auto">
                 <table class="w-full text-xs font-mono">
                     <thead>
-                        <tr class="bg-[#0a0a0f] border-b border-[#222] text-gray-500 uppercase tracking-wider">
-                            <th class="px-4 py-3 text-left">#</th>
-                            <th class="px-4 py-3 text-left">Filename</th>
-                            <th class="px-4 py-3 text-left">Size</th>
-                            <th class="px-4 py-3 text-left">SHA-256 Hash</th>
-                            <th class="px-4 py-3 text-center">Chi2</th>
-                            <th class="px-4 py-3 text-center">SPA</th>
-                            <th class="px-4 py-3 text-center">RS</th>
-                            <th class="px-4 py-3 text-center">Flags</th>
-                            <th class="px-4 py-3 text-center">Verdict</th>
-                            <th class="px-4 py-3 text-center">Action</th>
+                        <tr class="bg-zinc-950/80 border-b border-zinc-800/80 text-zinc-400 uppercase tracking-wider font-semibold">
+                            <th class="px-6 py-4 text-left">#</th>
+                            <th class="px-6 py-4 text-left font-sans font-bold text-zinc-300">Filename</th>
+                            <th class="px-6 py-4 text-left font-sans font-bold text-zinc-300">Size</th>
+                            <th class="px-6 py-4 text-left font-sans font-bold text-zinc-300">SHA-256 Hash</th>
+                            <th class="px-6 py-4 text-center font-sans font-bold text-zinc-300">Chi2</th>
+                            <th class="px-6 py-4 text-center font-sans font-bold text-zinc-300">SPA</th>
+                            <th class="px-6 py-4 text-center font-sans font-bold text-zinc-300">RS</th>
+                            <th class="px-6 py-4 text-center font-sans font-bold text-zinc-300">Flags</th>
+                            <th class="px-6 py-4 text-center font-sans font-bold text-zinc-300">Verdict</th>
+                            <th class="px-6 py-4 text-center font-sans font-bold text-zinc-300">Action</th>
                         </tr>
                     </thead>
-                    <tbody class="divide-y divide-[#111]">
+                    <tbody class="divide-y divide-zinc-800/50">
                         {% for r in batch_results %}
-                        <tr class="hover:bg-[#0a0a0f] transition-colors">
-                            <td class="px-4 py-3 text-gray-500">{{ loop.index }}</td>
-                            <td class="px-4 py-3 text-gray-200 font-bold truncate max-w-[180px]" title="{{ r.filename }}">{{ r.filename }}</td>
-                            <td class="px-4 py-3 text-gray-400">{{ r.size }}</td>
-                            <td class="px-4 py-3 text-gray-500 font-mono text-[10px] truncate max-w-[120px]" title="{{ r.sha256 }}">{{ r.sha256[:16] }}...</td>
-                            <td class="px-4 py-3 text-center {% if r.chi_score > 100 %}text-red-400{% else %}text-emerald-400{% endif %}">{{ "%.0f"|format(r.chi_score) }}</td>
-                            <td class="px-4 py-3 text-center {% if r.spa.indicator == 'stego' %}text-red-400{% else %}text-emerald-400{% endif %}">{{ "%.0f"|format(r.spa.lsb_correlation * 100) }}%</td>
-                            <td class="px-4 py-3 text-center {% if r.rs.indicator == 'stego' %}text-red-400{% else %}text-emerald-400{% endif %}">{{ "%.3f"|format(r.rs.rs_ratio) }}</td>
-                            <td class="px-4 py-3 text-center">
-                                <span class="{% if r.stego_flags == 0 %}text-emerald-400{% elif r.stego_flags == 1 %}text-yellow-400{% else %}text-red-400{% endif %} font-bold">{{ r.stego_flags }}/3</span>
+                        <tr class="hover:bg-zinc-800/40 transition-colors">
+                            <td class="px-6 py-4 text-zinc-500">{{ loop.index }}</td>
+                            <td class="px-6 py-4 text-zinc-100 font-bold truncate max-w-[200px] font-sans" title="{{ r.filename }}">{{ r.filename }}</td>
+                            <td class="px-6 py-4 text-zinc-400 font-sans font-medium">{{ r.size }}</td>
+                            <td class="px-6 py-4 text-zinc-500 font-mono text-[11px] truncate max-w-[140px]" title="{{ r.sha256 }}">{{ r.sha256[:16] }}...</td>
+                            <td class="px-6 py-4 text-center font-semibold {% if r.chi_score > 100 %}text-red-400 bg-red-500/10 rounded{% else %}text-emerald-400{% endif %}">{{ "%.0f"|format(r.chi_score) }}</td>
+                            <td class="px-6 py-4 text-center font-semibold {% if r.spa.indicator == 'stego' %}text-red-400 bg-red-500/10 rounded{% else %}text-emerald-400{% endif %}">{{ "%.0f"|format(r.spa.lsb_correlation * 100) }}%</td>
+                            <td class="px-6 py-4 text-center font-semibold {% if r.rs.indicator == 'stego' %}text-red-400 bg-red-500/10 rounded{% else %}text-emerald-400{% endif %}">{{ "%.3f"|format(r.rs.rs_ratio) }}</td>
+                            <td class="px-6 py-4 text-center">
+                                <span class="px-2 py-1 rounded font-bold {% if r.stego_flags == 0 %}bg-emerald-500/10 text-emerald-400 border border-emerald-500/20{% elif r.stego_flags == 1 %}bg-yellow-500/10 text-yellow-400 border border-yellow-500/20{% else %}bg-red-500/10 text-red-400 border border-red-500/20{% endif %}">{{ r.stego_flags }}/3</span>
                             </td>
-                            <td class="px-4 py-3 text-center">
+                            <td class="px-6 py-4 text-center font-sans">
                                 {% if r.verdict == 'CLEAN' %}
-                                <span class="inline-flex items-center gap-1 bg-emerald-950/40 border border-emerald-800 text-emerald-400 px-2 py-0.5 rounded-sm text-[10px] font-bold uppercase">CLEAN</span>
+                                <span class="inline-flex items-center gap-1.5 bg-emerald-500/10 border border-emerald-500/30 text-emerald-400 px-2.5 py-1 rounded-full text-xs font-bold uppercase tracking-wider"><i data-lucide="shield-check" class="w-3.5 h-3.5"></i> CLEAN</span>
                                 {% elif r.verdict == 'SUSPICIOUS' %}
-                                <span class="inline-flex items-center gap-1 bg-yellow-950/40 border border-yellow-800 text-yellow-400 px-2 py-0.5 rounded-sm text-[10px] font-bold uppercase">SUSPICIOUS</span>
+                                <span class="inline-flex items-center gap-1.5 bg-yellow-500/10 border border-yellow-500/30 text-yellow-400 px-2.5 py-1 rounded-full text-xs font-bold uppercase tracking-wider"><i data-lucide="alert-circle" class="w-3.5 h-3.5"></i> SUSPECT</span>
                                 {% else %}
-                                <span class="inline-flex items-center gap-1 bg-red-950/40 border border-red-800 text-red-400 px-2 py-0.5 rounded-sm text-[10px] font-bold uppercase">INFECTED</span>
+                                <span class="inline-flex items-center gap-1.5 bg-red-500/10 border border-red-500/30 text-red-400 px-2.5 py-1 rounded-full text-xs font-bold uppercase tracking-wider"><i data-lucide="shield-alert" class="w-3.5 h-3.5"></i> INFECTED</span>
                                 {% endif %}
                             </td>
-                            <td class="px-4 py-3 text-center">
+                            <td class="px-6 py-4 text-center font-sans font-semibold">
                                 {% if r.verdict != 'CLEAN' %}
-                                <a href="/sanitize?filename={{ r.filename }}" class="text-cyan-400 hover:text-cyan-300 text-[10px] underline">Sanitize</a>
+                                <a href="/sanitize?filename={{ r.filename }}" class="inline-flex items-center gap-1 bg-cyan-500/10 hover:bg-cyan-500/20 text-cyan-400 border border-cyan-500/30 px-3 py-1.5 rounded-lg text-xs transition-colors shadow-sm">Sanitize</a>
                                 {% else %}
-                                <span class="text-gray-600 text-[10px]">--</span>
+                                <span class="text-zinc-600 text-xs font-medium">--</span>
                                 {% endif %}
                             </td>
                         </tr>
@@ -378,285 +382,285 @@ DASHBOARD_HTML = """
         </div>
         {% endif %}
 
-        <div class="grid grid-cols-1 lg:grid-cols-2 gap-8">
+        <div class="grid grid-cols-1 lg:grid-cols-2 gap-8 font-sans">
 
-            <div class="bg-[#0a0a0f] border border-[#222] rounded-sm flex flex-col overflow-hidden relative shadow-2xl">
-                <div class="bg-[#111] border-b border-[#222] px-4 py-2.5 flex items-center justify-between select-none">
-                    <div class="flex items-center gap-2 text-gray-400 text-xs font-mono tracking-wider uppercase">
-                        <i data-lucide="crosshair" class="w-4 h-4 text-purple-400"></i>
+            <div class="bg-zinc-900/60 border border-zinc-800/80 rounded-2xl flex flex-col overflow-hidden relative shadow-xl backdrop-blur-sm">
+                <div class="bg-zinc-900/90 border-b border-zinc-800 px-6 py-4 flex items-center justify-between select-none">
+                    <div class="flex items-center gap-2.5 text-purple-400 font-bold uppercase text-sm tracking-wide font-sans">
+                        <i data-lucide="crosshair" class="w-5 h-5"></i>
                         Bit-Plane Inspector
                     </div>
-                    <div class="flex gap-1.5">
-                        <div class="w-2.5 h-2.5 rounded-full bg-gray-700"></div>
-                        <div class="w-2.5 h-2.5 rounded-full bg-gray-700"></div>
-                        <div class="w-2.5 h-2.5 rounded-full bg-gray-700"></div>
+                    <div class="flex gap-2">
+                        <div class="w-3 h-3 rounded-full bg-purple-500/40"></div>
+                        <div class="w-3 h-3 rounded-full bg-purple-500/40"></div>
+                        <div class="w-3 h-3 rounded-full bg-purple-500/40"></div>
                     </div>
                 </div>
-                <div class="p-6 flex-1 flex flex-col gap-6 font-mono text-sm">
-                    <form action="/bitplane" method="post" enctype="multipart/form-data" class="space-y-4">
-                        <div class="flex flex-col gap-2">
-                            <span class="text-gray-500 text-xs uppercase tracking-wider">Target Image Source</span>
-                            <label class="group relative flex items-center justify-center w-full h-12 px-4 transition-all border border-dashed border-gray-700 rounded-sm bg-[#050508] hover:bg-[#0f0f15] hover:border-cyan-500/50 cursor-pointer">
-                                <div class="flex items-center gap-2 text-gray-500 group-hover:text-cyan-400 transition-colors">
-                                    <i data-lucide="upload-cloud" class="w-4 h-4"></i>
-                                    <span id="bp-name" class="text-xs tracking-wider">Initialize_Upload_Sequence</span>
+                <div class="p-8 flex-1 flex flex-col gap-6 text-sm">
+                    <form action="/bitplane" method="post" enctype="multipart/form-data" class="space-y-6">
+                        <div class="flex flex-col gap-2.5">
+                            <span class="text-zinc-400 text-xs font-bold tracking-wider uppercase font-sans">Target Image Source</span>
+                            <label class="group relative flex items-center justify-center w-full h-14 px-4 transition-all border-2 border-dashed border-zinc-700/80 rounded-xl bg-zinc-950/60 hover:bg-zinc-950/90 hover:border-purple-500/50 cursor-pointer shadow-inner">
+                                <div class="flex items-center gap-2.5 text-zinc-400 group-hover:text-purple-400 transition-colors font-mono">
+                                    <i data-lucide="upload-cloud" class="w-5 h-5"></i>
+                                    <span id="bp-name" class="text-xs font-semibold tracking-wider font-sans">Initialize_Upload_Sequence</span>
                                 </div>
                                 <input type="file" name="image" accept="image/*" required class="hidden" onchange="updateFileName(this, 'bp-name')" />
                             </label>
                         </div>
-                        <div class="flex flex-col gap-2">
-                            <span class="text-gray-500 text-xs uppercase tracking-wider">Bit Plane (0 is LSB, 7 is MSB):</span>
-                            <div class="relative">
-                                <div class="absolute left-0 top-0 bottom-0 w-1 bg-cyan-900/50"></div>
-                                <input type="number" name="plane" min="0" max="7" value="0" class="w-full bg-[#050508] border border-gray-800 text-cyan-400 px-4 py-2.5 text-sm focus:outline-none focus:border-cyan-500 focus:ring-1 focus:ring-cyan-500/50 transition-all font-mono" />
+                        <div class="flex flex-col gap-2.5">
+                            <span class="text-zinc-400 text-xs font-bold tracking-wider uppercase font-sans">Bit Plane (0 is LSB, 7 is MSB):</span>
+                            <div class="relative rounded-xl overflow-hidden shadow-inner border border-zinc-800">
+                                <div class="absolute left-0 top-0 bottom-0 w-1.5 bg-purple-500"></div>
+                                <input type="number" name="plane" min="0" max="7" value="0" class="w-full bg-zinc-950 text-purple-300 px-5 py-3.5 text-sm font-semibold focus:outline-none focus:border-purple-500 focus:ring-1 focus:ring-purple-500/50 transition-all font-mono" />
                             </div>
                         </div>
-                        <button type="submit" class="w-full border px-6 py-3 uppercase tracking-widest text-xs font-bold transition-all duration-300 flex items-center justify-center gap-2 bg-cyan-950/30 text-cyan-400 border-cyan-800 hover:bg-cyan-900/50 hover:border-cyan-500 hover:shadow-[0_0_15px_rgba(6,182,212,0.2)]">
-                            <i data-lucide="terminal" class="w-4 h-4"></i> [ EXECUTE_VISUALIZATION ]
+                        <button type="submit" class="w-full border px-6 py-4 uppercase tracking-widest text-sm font-extrabold transition-all duration-300 flex items-center justify-center gap-3 bg-gradient-to-r from-purple-500/20 to-pink-500/20 text-purple-300 border-purple-500/50 hover:from-purple-500/30 hover:to-pink-500/30 hover:border-purple-400 hover:shadow-[0_0_30px_rgba(168,85,247,0.25)] rounded-xl font-sans">
+                            <i data-lucide="terminal" class="w-5 h-5"></i> [ EXECUTE_VISUALIZATION ]
                         </button>
                     </form>
                     {% if bitplane_img %}
-                    <div class="mt-4 border border-[#222] rounded-sm p-2 bg-[#050508]">
-                        <img src="{{ bitplane_img }}" alt="Bit Plane" class="w-full rounded border border-cyan-900/50">
+                    <div class="mt-4 border border-zinc-800 rounded-xl p-3 bg-zinc-950/80 shadow-inner">
+                        <img src="{{ bitplane_img }}" alt="Bit Plane" class="w-full rounded-lg border border-purple-500/30 shadow-md">
                     </div>
                     {% endif %}
                 </div>
             </div>
 
-            <div class="bg-[#0a0a0f] border border-[#222] rounded-sm flex flex-col overflow-hidden relative shadow-2xl">
-                <div class="bg-[#111] border-b border-[#222] px-4 py-2.5 flex items-center justify-between select-none">
-                    <div class="flex items-center gap-2 text-gray-400 text-xs font-mono tracking-wider uppercase">
-                        <i data-lucide="activity" class="w-4 h-4 text-orange-400"></i>
+            <div class="bg-zinc-900/60 border border-zinc-800/80 rounded-2xl flex flex-col overflow-hidden relative shadow-xl backdrop-blur-sm font-sans">
+                <div class="bg-zinc-900/90 border-b border-zinc-800 px-6 py-4 flex items-center justify-between select-none">
+                    <div class="flex items-center gap-2.5 text-orange-400 font-bold uppercase text-sm tracking-wide font-sans">
+                        <i data-lucide="activity" class="w-5 h-5"></i>
                         Entropy Mapping
                     </div>
-                    <div class="flex gap-1.5">
-                        <div class="w-2.5 h-2.5 rounded-full bg-gray-700"></div>
-                        <div class="w-2.5 h-2.5 rounded-full bg-gray-700"></div>
-                        <div class="w-2.5 h-2.5 rounded-full bg-gray-700"></div>
+                    <div class="flex gap-2">
+                        <div class="w-3 h-3 rounded-full bg-orange-500/40"></div>
+                        <div class="w-3 h-3 rounded-full bg-orange-500/40"></div>
+                        <div class="w-3 h-3 rounded-full bg-orange-500/40"></div>
                     </div>
                 </div>
-                <div class="p-6 flex-1 flex flex-col gap-6 font-mono text-sm">
-                    <form action="/entropy" method="post" enctype="multipart/form-data" class="space-y-4">
-                        <div class="flex flex-col gap-2">
-                            <span class="text-gray-500 text-xs uppercase tracking-wider">Target Image Source</span>
-                            <label class="group relative flex items-center justify-center w-full h-12 px-4 transition-all border border-dashed border-gray-700 rounded-sm bg-[#050508] hover:bg-[#0f0f15] hover:border-cyan-500/50 cursor-pointer">
-                                <div class="flex items-center gap-2 text-gray-500 group-hover:text-cyan-400 transition-colors">
-                                    <i data-lucide="upload-cloud" class="w-4 h-4"></i>
-                                    <span id="em-name" class="text-xs tracking-wider">Initialize_Upload_Sequence</span>
+                <div class="p-8 flex-1 flex flex-col gap-6 text-sm font-sans">
+                    <form action="/entropy" method="post" enctype="multipart/form-data" class="space-y-6 font-sans">
+                        <div class="flex flex-col gap-2.5 font-sans">
+                            <span class="text-zinc-400 text-xs font-bold tracking-wider uppercase font-sans">Target Image Source</span>
+                            <label class="group relative flex items-center justify-center w-full h-14 px-4 transition-all border-2 border-dashed border-zinc-700/80 rounded-xl bg-zinc-950/60 hover:bg-zinc-950/90 hover:border-orange-500/50 cursor-pointer shadow-inner">
+                                <div class="flex items-center gap-2.5 text-zinc-400 group-hover:text-orange-400 transition-colors font-mono">
+                                    <i data-lucide="upload-cloud" class="w-5 h-5"></i>
+                                    <span id="em-name" class="text-xs font-semibold tracking-wider font-sans">Initialize_Upload_Sequence</span>
                                 </div>
                                 <input type="file" name="image" accept="image/*" required class="hidden" onchange="updateFileName(this, 'em-name')" />
                             </label>
                         </div>
-                        <div class="flex flex-col gap-2">
-                            <span class="text-gray-500 text-xs uppercase tracking-wider">Block Size (Pixels):</span>
-                            <div class="relative">
-                                <div class="absolute left-0 top-0 bottom-0 w-1 bg-cyan-900/50"></div>
-                                <input type="number" name="block_size" min="4" max="32" value="8" class="w-full bg-[#050508] border border-gray-800 text-cyan-400 px-4 py-2.5 text-sm focus:outline-none focus:border-cyan-500 focus:ring-1 focus:ring-cyan-500/50 transition-all font-mono" />
+                        <div class="flex flex-col gap-2.5 font-sans">
+                            <span class="text-zinc-400 text-xs font-bold tracking-wider uppercase font-sans">Block Size (Pixels):</span>
+                            <div class="relative rounded-xl overflow-hidden shadow-inner border border-zinc-800 font-mono">
+                                <div class="absolute left-0 top-0 bottom-0 w-1.5 bg-orange-500 font-sans"></div>
+                                <input type="number" name="block_size" min="4" max="32" value="8" class="w-full bg-zinc-950 text-orange-300 px-5 py-3.5 text-sm font-semibold focus:outline-none focus:border-orange-500 focus:ring-1 focus:ring-orange-500/50 transition-all font-mono" />
                             </div>
                         </div>
-                        <button type="submit" class="w-full border px-6 py-3 uppercase tracking-widest text-xs font-bold transition-all duration-300 flex items-center justify-center gap-2 bg-cyan-950/30 text-cyan-400 border-cyan-800 hover:bg-cyan-900/50 hover:border-cyan-500 hover:shadow-[0_0_15px_rgba(6,182,212,0.2)]">
-                            <i data-lucide="terminal" class="w-4 h-4"></i> [ GENERATE_HEATMAP ]
+                        <button type="submit" class="w-full border px-6 py-4 uppercase tracking-widest text-sm font-extrabold transition-all duration-300 flex items-center justify-center gap-3 bg-gradient-to-r from-orange-500/20 to-amber-500/20 text-orange-300 border-orange-500/50 hover:from-orange-500/30 hover:to-amber-500/30 hover:border-orange-400 hover:shadow-[0_0_30px_rgba(249,115,22,0.25)] rounded-xl font-sans">
+                            <i data-lucide="terminal" class="w-5 h-5"></i> [ GENERATE_HEATMAP ]
                         </button>
                     </form>
                     {% if entropy_img %}
-                    <div class="mt-4 border border-[#222] rounded-sm p-2 bg-[#050508]">
-                        <img src="{{ entropy_img }}" alt="Entropy Heatmap" class="w-full rounded border border-orange-900/50">
+                    <div class="mt-4 border border-zinc-800 rounded-xl p-3 bg-zinc-950/80 shadow-inner font-sans">
+                        <img src="{{ entropy_img }}" alt="Entropy Heatmap" class="w-full rounded-lg border border-orange-500/30 shadow-md">
                     </div>
                     {% endif %}
                 </div>
             </div>
         </div>
 
-        <div class="bg-[#0a0a0f] border border-cyan-900/50 rounded-sm flex flex-col overflow-hidden relative shadow-2xl">
-            <div class="bg-[#111] border-b border-[#222] px-4 py-2.5 flex items-center justify-between select-none">
-                <div class="flex items-center gap-2 text-cyan-400 text-xs font-mono tracking-wider uppercase">
-                    <i data-lucide="cpu" class="w-4 h-4"></i>
+        <div class="bg-zinc-900/60 border border-cyan-500/40 rounded-2xl flex flex-col overflow-hidden relative shadow-2xl backdrop-blur-sm font-sans font-medium">
+            <div class="bg-zinc-900/90 border-b border-zinc-800 px-6 py-4 flex items-center justify-between select-none font-mono">
+                <div class="flex items-center gap-2.5 text-cyan-400 font-bold text-sm tracking-wide uppercase font-sans">
+                    <i data-lucide="cpu" class="w-5 h-5"></i>
                     Deep AI Steganalysis Engine
                 </div>
-                <div class="flex gap-1.5">
-                    <div class="w-2.5 h-2.5 rounded-full bg-cyan-900/50"></div>
-                    <div class="w-2.5 h-2.5 rounded-full bg-cyan-900/50"></div>
-                    <div class="w-2.5 h-2.5 rounded-full bg-cyan-900/50"></div>
+                <div class="flex gap-2 font-mono">
+                    <div class="w-3 h-3 rounded-full bg-cyan-500/40 font-mono"></div>
+                    <div class="w-3 h-3 rounded-full bg-cyan-500/40 font-mono"></div>
+                    <div class="w-3 h-3 rounded-full bg-cyan-500/40 font-mono"></div>
                 </div>
             </div>
-            <div class="p-8">
-                <form action="/analyze" method="post" enctype="multipart/form-data" class="flex flex-col md:flex-row gap-6 items-end">
-                    <div class="flex-1 w-full flex flex-col gap-2">
-                        <span class="text-gray-500 text-xs uppercase tracking-wider">Upload Suspect Artifact for Deep Scan</span>
-                        <label class="group relative flex items-center justify-center w-full h-12 px-4 transition-all border border-dashed border-cyan-800/60 rounded-sm bg-[#050508] hover:bg-[#0f0f15] hover:border-cyan-400 cursor-pointer shadow-[0_0_15px_rgba(6,182,212,0.1)]">
-                            <div class="flex items-center gap-2 text-cyan-500 group-hover:text-cyan-300 transition-colors">
-                                <i data-lucide="upload-cloud" class="w-5 h-5"></i>
-                                <span id="an-name" class="text-xs font-bold tracking-widest uppercase">Select_Suspect_Image_Artifact</span>
+            <div class="p-8 md:p-10 font-sans">
+                <form action="/analyze" method="post" enctype="multipart/form-data" class="flex flex-col md:flex-row gap-6 items-end font-sans">
+                    <div class="flex-1 w-full flex flex-col gap-2.5 font-sans">
+                        <span class="text-zinc-400 text-xs font-bold uppercase tracking-wider font-sans">Upload Suspect Artifact for Deep Forensic Scan</span>
+                        <label class="group relative flex items-center justify-center w-full h-16 px-6 transition-all border-2 border-dashed border-cyan-500/40 rounded-xl bg-zinc-950/60 hover:bg-zinc-950/90 hover:border-cyan-400 cursor-pointer shadow-inner font-sans">
+                            <div class="flex items-center gap-3 text-cyan-500 group-hover:text-cyan-300 transition-colors font-mono">
+                                <i data-lucide="upload-cloud" class="w-6 h-6 animate-pulse"></i>
+                                <span id="an-name" class="text-sm font-bold tracking-widest uppercase font-sans">Select_Suspect_Image_Artifact</span>
                             </div>
                             <input type="file" name="image" accept="image/*" required class="hidden" onchange="updateFileName(this, 'an-name')" />
                         </label>
                     </div>
-                    <button type="submit" class="w-full md:w-auto border px-8 py-3.5 uppercase tracking-widest text-xs font-bold transition-all duration-300 flex items-center justify-center gap-2 bg-cyan-950/40 text-cyan-300 border-cyan-700 hover:bg-cyan-900/70 hover:border-cyan-400 hover:shadow-[0_0_25px_rgba(6,182,212,0.3)]">
-                        <i data-lucide="terminal" class="w-4 h-4"></i> [ RUN_FULL_DIAGNOSTIC ]
+                    <button type="submit" class="w-full md:w-auto border px-10 py-5 uppercase tracking-widest text-sm font-extrabold transition-all duration-300 flex items-center justify-center gap-3 bg-gradient-to-r from-cyan-500/20 to-blue-500/20 text-cyan-300 border-cyan-500/50 hover:from-cyan-500/30 hover:to-blue-500/30 hover:border-cyan-400 hover:shadow-[0_0_35px_rgba(6,182,212,0.3)] rounded-xl shadow-lg font-sans">
+                        <i data-lucide="terminal" class="w-5 h-5 font-sans"></i> [ RUN_FULL_DIAGNOSTIC ]
                     </button>
                 </form>
             </div>
         </div>
 
         {% if analysis %}
-        <div class="bg-[#050508] border border-[#222] rounded-sm overflow-hidden shadow-2xl transition-all duration-500">
-            <div class="bg-[#0a0a0f] border-b border-[#222] px-6 py-4 flex items-center justify-between flex-wrap gap-3">
-                <div class="flex items-center gap-3">
-                    <i data-lucide="terminal" class="w-5 h-5 text-cyan-500"></i>
-                    <h2 class="text-sm md:text-base uppercase tracking-widest font-bold text-gray-200">
+        <div class="bg-zinc-900/60 border border-zinc-800/80 rounded-2xl overflow-hidden shadow-2xl transition-all duration-500 backdrop-blur-sm font-sans">
+            <div class="bg-zinc-900/90 border-b border-zinc-800 px-8 py-5 flex items-center justify-between flex-wrap gap-4 font-sans">
+                <div class="flex items-center gap-3.5 font-sans">
+                    <i data-lucide="terminal" class="w-6 h-6 text-cyan-400 font-sans"></i>
+                    <h2 class="text-base md:text-lg uppercase tracking-wider font-extrabold text-white font-mono">
                         Forensic_Investigation_Report.log
                     </h2>
                 </div>
-                <div class="flex items-center gap-3">
-                    <span class="text-xs bg-[#111] px-3 py-1 rounded-sm border border-[#222] text-gray-400 font-mono">
-                        PIXEL PAIRS SCANNED: <span class="text-cyan-400 font-bold">{{ "{:,}".format(analysis.spa.total_pairs|default(1045506)) }}</span>
+                <div class="flex items-center gap-4 font-sans">
+                    <span class="text-xs bg-zinc-950 px-4 py-2 rounded-lg border border-zinc-800 text-zinc-400 font-mono tracking-wider font-semibold shadow-sm font-mono">
+                        PIXEL PAIRS SCANNED: <span class="text-cyan-400 font-bold font-mono">{{ "{:,}".format(analysis.spa.total_pairs|default(1045506)) }}</span>
                     </span>
-                    <a href="/pdf-report-single" class="inline-flex items-center gap-1.5 bg-red-950/40 border border-red-800 text-red-400 text-xs px-4 py-2 rounded-sm hover:bg-red-900/60 hover:border-red-500 hover:shadow-[0_0_15px_rgba(239,68,68,0.2)] transition-all font-bold uppercase tracking-wider">
-                        <i data-lucide="file-down" class="w-3.5 h-3.5"></i> Download PDF Report
+                    <a href="/pdf-report-single" class="inline-flex items-center gap-2 bg-gradient-to-r from-red-500/20 to-orange-500/20 border border-red-500/40 text-red-400 text-xs px-5 py-2.5 rounded-lg hover:from-red-500/30 hover:to-orange-500/30 hover:border-red-400 hover:shadow-[0_0_20px_rgba(239,68,68,0.25)] transition-all font-bold uppercase tracking-wider shadow-sm font-sans">
+                        <i data-lucide="file-down" class="w-4 h-4 font-sans"></i> Download PDF Report
                     </a>
                 </div>
             </div>
 
-            <div class="p-0 divide-y divide-[#111]">
+            <div class="p-0 divide-y divide-zinc-800/50 font-sans">
 
-                <div class="p-6 md:p-8 hover:bg-[#0a0a0f] transition-colors relative group">
-                    <div class="absolute left-0 top-0 bottom-0 w-1 {% if analysis.chi_score > 100 %}bg-red-600{% else %}bg-emerald-600{% endif %}"></div>
-                    <div class="flex flex-col md:flex-row justify-between items-start md:items-center gap-4 mb-4">
-                        <div>
-                            <div class="flex items-center gap-2">
-                                <h3 class="text-gray-100 font-bold tracking-wide text-lg">1. Chi-Squared PoV Anomaly Scan</h3>
-                                <span class="text-xs px-2 py-0.5 rounded bg-[#111] text-gray-400 font-mono">Color Distribution</span>
+                <div class="p-8 md:p-10 hover:bg-zinc-800/20 transition-colors relative group font-sans">
+                    <div class="absolute left-0 top-0 bottom-0 w-1.5 {% if analysis.chi_score > 100 %}bg-red-500{% else %}bg-emerald-500{% endif %} font-sans"></div>
+                    <div class="flex flex-col md:flex-row justify-between items-start md:items-center gap-6 mb-6 font-sans">
+                        <div class="font-sans">
+                            <div class="flex items-center gap-3 font-sans">
+                                <h3 class="text-white font-extrabold tracking-tight text-xl font-sans">1. Chi-Squared PoV Anomaly Scan</h3>
+                                <span class="text-xs px-3 py-1 rounded-full bg-zinc-950 text-zinc-400 font-mono font-semibold border border-zinc-800 font-mono">Color Distribution</span>
                             </div>
-                            <p class="text-gray-400 text-xs mt-1">Measures equality of adjacent color pairs. Stego payloads force color pairs into identical 50/50 splits.</p>
+                            <p class="text-zinc-400 text-sm mt-2 font-medium font-sans">Measures equality of adjacent color pairs. Stego payloads force color pairs into identical 50/50 splits.</p>
                         </div>
-                        <span class="text-sm text-gray-400 bg-[#111] px-4 py-2 rounded-sm border border-[#222] font-mono flex items-center gap-2">
-                            Score: <span class="{% if analysis.chi_score > 100 %}text-red-400{% else %}text-emerald-400{% endif %} font-bold text-lg">{{ "%.2f"|format(analysis.chi_score) }}</span>
+                        <span class="text-sm text-zinc-300 bg-zinc-950 px-5 py-2.5 rounded-xl border border-zinc-800 font-mono flex items-center gap-3 font-semibold shadow-inner font-mono">
+                            Score: <span class="{% if analysis.chi_score > 100 %}text-red-400{% else %}text-emerald-400{% endif %} font-bold text-xl font-mono">{{ "%.2f"|format(analysis.chi_score) }}</span>
                         </span>
                     </div>
-                    <div class="w-full bg-[#111] h-3 rounded-full border border-[#222] overflow-hidden relative mb-2">
+                    <div class="w-full bg-zinc-950 h-4 rounded-full border border-zinc-800 overflow-hidden relative mb-3 shadow-inner font-sans">
                         {% set chi_pct = (analysis.chi_score / 2000.0 * 100)|round|int %}
                         {% if chi_pct > 100 %}{% set chi_pct = 100 %}{% endif %}
-                        <div class="h-full rounded-full transition-all duration-1000 {% if analysis.chi_score > 100 %}bg-gradient-to-r from-orange-500 to-red-600{% else %}bg-gradient-to-r from-emerald-500 to-cyan-500{% endif %}" style="width: {{ chi_pct }}%;"></div>
+                        <div class="h-full rounded-full transition-all duration-1000 {% if analysis.chi_score > 100 %}bg-gradient-to-r from-orange-500 to-red-600{% else %}bg-gradient-to-r from-emerald-500 to-cyan-500{% endif %} font-sans" style="width: {{ chi_pct }}%;"></div>
                     </div>
-                    <div class="flex justify-between text-[11px] text-gray-500 font-mono mb-4">
-                        <span>0 (Perfectly Natural)</span>
-                        <span class="text-yellow-500">Threshold: 100</span>
-                        <span>2000+ (Heavy Secret Payload)</span>
+                    <div class="flex justify-between text-xs text-zinc-500 font-mono font-semibold mb-6 font-mono">
+                        <span class="font-mono">0 (Perfectly Natural)</span>
+                        <span class="text-yellow-500 font-mono">Threshold: 100</span>
+                        <span class="font-mono">2000+ (Heavy Secret Payload)</span>
                     </div>
                     {% if analysis.chi_score > 100 %}
-                    <div class="inline-flex items-center gap-2 bg-red-950/40 border border-red-900/50 text-red-500 text-xs px-3 py-1.5 rounded-sm mb-2 font-bold uppercase tracking-wider">
-                        <i data-lucide="alert-triangle" class="w-4 h-4"></i> HIGH STATISTICAL ANOMALY DETECTED
+                    <div class="inline-flex items-center gap-2.5 bg-red-500/10 border border-red-500/30 text-red-400 text-xs px-4 py-2 rounded-lg mb-3 font-bold uppercase tracking-wider font-sans">
+                        <i data-lucide="alert-triangle" class="w-4 h-4 font-sans"></i> HIGH STATISTICAL ANOMALY DETECTED
                     </div>
-                    <p class="text-red-300 text-xs leading-relaxed bg-red-950/20 p-3 rounded border border-red-900/30 font-mono mt-1">
+                    <p class="text-red-300/90 text-sm leading-relaxed bg-red-500/5 p-4 rounded-xl border border-red-500/20 font-sans font-medium mt-1 font-sans">
                         Layman Verdict: The mathematical color balance is unnatural. This proves someone modified the lowest bits of the pixels to store secret data.
                     </p>
                     {% else %}
-                    <div class="inline-flex items-center gap-2 bg-emerald-950/40 border border-emerald-900/50 text-emerald-500 text-xs px-3 py-1.5 rounded-sm mb-2 font-bold uppercase tracking-wider">
-                        <i data-lucide="check-circle-2" class="w-4 h-4"></i> NATURAL COLOR BALANCE
+                    <div class="inline-flex items-center gap-2.5 bg-emerald-500/10 border border-emerald-500/30 text-emerald-400 text-xs px-4 py-2 rounded-lg mb-3 font-bold uppercase tracking-wider font-sans">
+                        <i data-lucide="check-circle-2" class="w-4 h-4 font-sans"></i> NATURAL COLOR BALANCE
                     </div>
-                    <p class="text-emerald-300 text-xs leading-relaxed bg-emerald-950/20 p-3 rounded border border-emerald-900/30 font-mono mt-1">
+                    <p class="text-emerald-300/90 text-sm leading-relaxed bg-emerald-500/5 p-4 rounded-xl border border-emerald-500/20 font-sans font-medium mt-1 font-sans">
                         Layman Verdict: Color frequencies are completely natural. No mathematical tampering detected.
                     </p>
                     {% endif %}
                 </div>
 
-                <div class="p-6 md:p-8 hover:bg-[#0a0a0f] transition-colors relative group">
-                    <div class="absolute left-0 top-0 bottom-0 w-1 {% if analysis.spa.indicator == 'stego' %}bg-red-600{% else %}bg-emerald-600{% endif %}"></div>
-                    <div class="flex flex-col md:flex-row justify-between items-start md:items-center gap-4 mb-4">
-                        <div>
-                            <div class="flex items-center gap-2">
-                                <h3 class="text-gray-100 font-bold tracking-wide text-lg">2. Sample Pair Analysis (SPA) Scan</h3>
-                                <span class="text-xs px-2 py-0.5 rounded bg-[#111] text-gray-400 font-mono">Neighbor Correlation</span>
+                <div class="p-8 md:p-10 hover:bg-zinc-800/20 transition-colors relative group font-sans">
+                    <div class="absolute left-0 top-0 bottom-0 w-1.5 {% if analysis.spa.indicator == 'stego' %}bg-red-500{% else %}bg-emerald-500{% endif %} font-sans"></div>
+                    <div class="flex flex-col md:flex-row justify-between items-start md:items-center gap-6 mb-6 font-sans">
+                        <div class="font-sans">
+                            <div class="flex items-center gap-3 font-sans">
+                                <h3 class="text-white font-extrabold tracking-tight text-xl font-sans">2. Sample Pair Analysis (SPA) Scan</h3>
+                                <span class="text-xs px-3 py-1 rounded-full bg-zinc-950 text-zinc-400 font-mono font-semibold border border-zinc-800 font-mono">Neighbor Correlation</span>
                             </div>
-                            <p class="text-gray-400 text-xs mt-1">Scans adjacent pixel pairs across the image. Stego payloads inject random bit noise between neighbors.</p>
+                            <p class="text-zinc-400 text-sm mt-2 font-medium font-sans">Scans adjacent pixel pairs across the image. Stego payloads inject random bit noise between neighbors.</p>
                         </div>
-                        <span class="text-sm text-gray-400 bg-[#111] px-4 py-2 rounded-sm border border-[#222] font-mono flex items-center gap-2">
-                            LSB Match: <span class="{% if analysis.spa.indicator == 'stego' %}text-red-400{% else %}text-emerald-400{% endif %} font-bold text-lg">{{ "%.2f"|format(analysis.spa.lsb_correlation * 100) }}%</span>
+                        <span class="text-sm text-zinc-300 bg-zinc-950 px-5 py-2.5 rounded-xl border border-zinc-800 font-mono flex items-center gap-3 font-semibold shadow-inner font-mono">
+                            LSB Match: <span class="{% if analysis.spa.indicator == 'stego' %}text-red-400{% else %}text-emerald-400{% endif %} font-bold text-xl font-mono">{{ "%.2f"|format(analysis.spa.lsb_correlation * 100) }}%</span>
                         </span>
                     </div>
-                    <div class="w-full bg-[#111] h-3 rounded-full border border-[#222] overflow-hidden relative mb-2">
+                    <div class="w-full bg-zinc-950 h-4 rounded-full border border-zinc-800 overflow-hidden relative mb-3 shadow-inner font-sans">
                         {% set spa_pct = (analysis.spa.lsb_correlation * 100)|round|int %}
-                        <div class="h-full rounded-full transition-all duration-1000 {% if analysis.spa.indicator == 'stego' %}bg-red-500{% else %}bg-emerald-500{% endif %}" style="width: {{ spa_pct }}%;"></div>
+                        <div class="h-full rounded-full transition-all duration-1000 {% if analysis.spa.indicator == 'stego' %}bg-red-500{% else %}bg-emerald-500{% endif %} font-sans" style="width: {{ spa_pct }}%;"></div>
                     </div>
-                    <div class="flex justify-between text-[11px] text-gray-500 font-mono mb-4">
-                        <span>0% (Random Noise)</span>
-                        <span>Expected Natural: 50%</span>
-                        <span>100% (Perfect Smooth Match)</span>
+                    <div class="flex justify-between text-xs text-zinc-500 font-mono font-semibold mb-6 font-mono">
+                        <span class="font-mono">0% (Random Noise)</span>
+                        <span class="font-mono">Expected Natural: 50%</span>
+                        <span class="font-mono">100% (Perfect Smooth Match)</span>
                     </div>
                     {% if analysis.spa.indicator == 'stego' %}
-                    <div class="inline-flex items-center gap-2 bg-red-950/40 border border-red-900/50 text-red-500 text-xs px-3 py-1.5 rounded-sm mb-2 font-bold uppercase tracking-wider">
-                        <i data-lucide="alert-triangle" class="w-4 h-4"></i> MODIFIED BITS DETECTED
+                    <div class="inline-flex items-center gap-2.5 bg-red-500/10 border border-red-500/30 text-red-400 text-xs px-4 py-2 rounded-lg mb-3 font-bold uppercase tracking-wider font-sans">
+                        <i data-lucide="alert-triangle" class="w-4 h-4 font-sans"></i> MODIFIED BITS DETECTED
                     </div>
-                    <p class="text-red-300 text-xs leading-relaxed bg-red-950/20 p-3 rounded border border-red-900/30 font-mono mt-1">
+                    <p class="text-red-300/90 text-sm leading-relaxed bg-red-500/5 p-4 rounded-xl border border-red-500/20 font-sans font-medium mt-1 font-sans">
                         Layman Verdict: Neighboring pixels show abnormal bit correlation. The natural smooth transitions have been corrupted by secret text.
                     </p>
                     {% else %}
-                    <div class="inline-flex items-center gap-2 bg-emerald-950/40 border border-emerald-900/50 text-emerald-500 text-xs px-3 py-1.5 rounded-sm mb-2 font-bold uppercase tracking-wider">
-                        <i data-lucide="check-circle-2" class="w-4 h-4"></i> NATURAL CORRELATION
+                    <div class="inline-flex items-center gap-2.5 bg-emerald-500/10 border border-emerald-500/30 text-emerald-400 text-xs px-4 py-2 rounded-lg mb-3 font-bold uppercase tracking-wider font-sans">
+                        <i data-lucide="check-circle-2" class="w-4 h-4 font-sans"></i> NATURAL CORRELATION
                     </div>
-                    <p class="text-emerald-300 text-xs leading-relaxed bg-emerald-950/20 p-3 rounded border border-emerald-900/30 font-mono mt-1">
+                    <p class="text-emerald-300/90 text-sm leading-relaxed bg-emerald-500/5 p-4 rounded-xl border border-emerald-500/20 font-sans font-medium mt-1 font-sans">
                         Layman Verdict: Adjacent pixels blend perfectly naturally.
                     </p>
                     {% endif %}
                 </div>
 
-                <div class="p-6 md:p-8 hover:bg-[#0a0a0f] transition-colors relative group">
-                    <div class="absolute left-0 top-0 bottom-0 w-1 {% if analysis.rs.indicator == 'stego' %}bg-red-600{% else %}bg-emerald-600{% endif %}"></div>
-                    <div class="flex flex-col md:flex-row justify-between items-start md:items-center gap-4 mb-4">
-                        <div>
-                            <div class="flex items-center gap-2">
-                                <h3 class="text-gray-100 font-bold tracking-wide text-lg">3. RS Flipper (Regular-Singular) Scan</h3>
-                                <span class="text-xs px-2 py-0.5 rounded bg-[#111] text-gray-400 font-mono">Mathematical Inversion</span>
+                <div class="p-8 md:p-10 hover:bg-zinc-800/20 transition-colors relative group font-sans">
+                    <div class="absolute left-0 top-0 bottom-0 w-1.5 {% if analysis.rs.indicator == 'stego' %}bg-red-500{% else %}bg-emerald-500{% endif %} font-sans"></div>
+                    <div class="flex flex-col md:flex-row justify-between items-start md:items-center gap-6 mb-6 font-sans">
+                        <div class="font-sans">
+                            <div class="flex items-center gap-3 font-sans">
+                                <h3 class="text-white font-extrabold tracking-tight text-xl font-sans">3. RS Flipper (Regular-Singular) Scan</h3>
+                                <span class="text-xs px-3 py-1 rounded-full bg-zinc-950 text-zinc-400 font-mono font-semibold border border-zinc-800 font-mono">Mathematical Inversion</span>
                             </div>
-                            <p class="text-gray-400 text-xs mt-1">Flips pixel groups with mathematical inversion masks. Secret payloads shatter the natural Regular vs Singular symmetry.</p>
+                            <p class="text-zinc-400 text-sm mt-2 font-medium font-sans">Flips pixel groups with mathematical inversion masks. Secret payloads shatter the natural Regular vs Singular symmetry.</p>
                         </div>
-                        <span class="text-sm text-gray-400 bg-[#111] px-4 py-2 rounded-sm border border-[#222] font-mono flex items-center gap-2">
-                            RS Ratio: <span class="{% if analysis.rs.indicator == 'stego' %}text-red-400{% else %}text-emerald-400{% endif %} font-bold text-lg">{{ "%.4f"|format(analysis.rs.rs_ratio) }}</span>
+                        <span class="text-sm text-zinc-300 bg-zinc-950 px-5 py-2.5 rounded-xl border border-zinc-800 font-mono flex items-center gap-3 font-semibold shadow-inner font-mono">
+                            RS Ratio: <span class="{% if analysis.rs.indicator == 'stego' %}text-red-400{% else %}text-emerald-400{% endif %} font-bold text-xl font-mono">{{ "%.4f"|format(analysis.rs.rs_ratio) }}</span>
                         </span>
                     </div>
-                    <div class="w-full bg-[#111] h-3 rounded-full border border-[#222] overflow-hidden relative mb-2">
+                    <div class="w-full bg-zinc-950 h-4 rounded-full border border-zinc-800 overflow-hidden relative mb-3 shadow-inner font-sans">
                         {% set rs_pct = (analysis.rs.rs_ratio * 100)|round|int %}
                         {% if rs_pct > 100 %}{% set rs_pct = 100 %}{% endif %}
-                        <div class="h-full rounded-full transition-all duration-1000 {% if analysis.rs.indicator == 'stego' %}bg-red-500{% else %}bg-emerald-500{% endif %}" style="width: {{ rs_pct }}%;"></div>
+                        <div class="h-full rounded-full transition-all duration-1000 {% if analysis.rs.indicator == 'stego' %}bg-red-500{% else %}bg-emerald-500{% endif %} font-sans" style="width: {{ rs_pct }}%;"></div>
                     </div>
-                    <div class="flex justify-between text-[11px] text-gray-500 font-mono mb-4">
-                        <span>0.0 (Clean Natural Equilibrium)</span>
-                        <span class="text-yellow-500">Stego Threshold: > 0.05</span>
-                        <span>1.0 (Full Stego Payload)</span>
+                    <div class="flex justify-between text-xs text-zinc-500 font-mono font-semibold mb-6 font-mono">
+                        <span class="font-mono">0.0 (Clean Natural Equilibrium)</span>
+                        <span class="text-yellow-500 font-mono">Stego Threshold: > 0.05</span>
+                        <span class="font-mono">1.0 (Full Stego Payload)</span>
                     </div>
-                    <div class="grid grid-cols-2 md:grid-cols-4 gap-4 bg-[#0a0a0f] p-4 rounded border border-[#1f1f30] font-mono text-xs mb-4">
-                        <div><span class="text-gray-500">Regular (R):</span> <span class="text-cyan-400 font-bold">{{ analysis.rs.R }}</span></div>
-                        <div><span class="text-gray-500">R-Minus (R-):</span> <span class="text-purple-400">{{ analysis.rs.R_minus }}</span></div>
-                        <div><span class="text-gray-500">Singular (S):</span> <span class="text-orange-400 font-bold">{{ analysis.rs.S }}</span></div>
-                        <div><span class="text-gray-500">S-Minus (S-):</span> <span class="text-yellow-400">{{ analysis.rs.S_minus }}</span></div>
+                    <div class="grid grid-cols-2 md:grid-cols-4 gap-4 bg-zinc-950/80 p-5 rounded-xl border border-zinc-800/80 font-mono text-xs mb-6 shadow-inner font-mono">
+                        <div class="flex flex-col gap-1 font-mono"><span class="text-zinc-500 font-sans font-medium font-sans">Regular (R):</span> <span class="text-cyan-400 font-bold text-sm font-mono">{{ analysis.rs.R }}</span></div>
+                        <div class="flex flex-col gap-1 font-mono"><span class="text-zinc-500 font-sans font-medium font-sans">R-Minus (R-):</span> <span class="text-purple-400 font-bold text-sm font-mono">{{ analysis.rs.R_minus }}</span></div>
+                        <div class="flex flex-col gap-1 font-mono"><span class="text-zinc-500 font-sans font-medium font-sans">Singular (S):</span> <span class="text-orange-400 font-bold text-sm font-mono">{{ analysis.rs.S }}</span></div>
+                        <div class="flex flex-col gap-1 font-mono"><span class="text-zinc-500 font-sans font-medium font-sans">S-Minus (S-):</span> <span class="text-yellow-400 font-bold text-sm font-mono">{{ analysis.rs.S_minus }}</span></div>
                     </div>
                     {% if analysis.rs.indicator == 'stego' %}
-                    <div class="inline-flex items-center gap-2 bg-red-950/40 border border-red-900/50 text-red-500 text-xs px-3 py-1.5 rounded-sm mb-2 font-bold uppercase tracking-wider">
-                        <i data-lucide="alert-triangle" class="w-4 h-4"></i> STEGANOGRAPHY DEFINITIVELY DETECTED
+                    <div class="inline-flex items-center gap-2.5 bg-red-500/10 border border-red-500/30 text-red-400 text-xs px-4 py-2 rounded-lg mb-3 font-bold uppercase tracking-wider font-sans">
+                        <i data-lucide="alert-triangle" class="w-4 h-4 font-sans"></i> STEGANOGRAPHY DEFINITIVELY DETECTED
                     </div>
-                    <p class="text-red-300 text-xs leading-relaxed bg-red-950/20 p-3 rounded border border-red-900/30 font-mono mt-1">
+                    <p class="text-red-300/90 text-sm leading-relaxed bg-red-500/5 p-4 rounded-xl border border-red-500/20 font-sans font-medium mt-1 font-sans">
                         Layman Verdict: A ratio greater than 0.05 is mathematically impossible in natural images. This is absolute proof that secret data is encrypted within the pixel groups.
                     </p>
                     {% else %}
-                    <div class="inline-flex items-center gap-2 bg-emerald-950/40 border border-emerald-900/50 text-emerald-500 text-xs px-3 py-1.5 rounded-sm mb-2 font-bold uppercase tracking-wider">
-                        <i data-lucide="check-circle-2" class="w-4 h-4"></i> NATURAL FLIP BEHAVIOR
+                    <div class="inline-flex items-center gap-2.5 bg-emerald-500/10 border border-emerald-500/30 text-emerald-400 text-xs px-4 py-2 rounded-lg mb-3 font-bold uppercase tracking-wider font-sans">
+                        <i data-lucide="check-circle-2" class="w-4 h-4 font-sans"></i> NATURAL FLIP BEHAVIOR
                     </div>
-                    <p class="text-emerald-300 text-xs leading-relaxed bg-emerald-950/20 p-3 rounded border border-emerald-900/30 font-mono mt-1">
+                    <p class="text-emerald-300/90 text-sm leading-relaxed bg-emerald-500/5 p-4 rounded-xl border border-emerald-500/20 font-sans font-medium mt-1 font-sans">
                         Layman Verdict: Pixel group flipping statistics match natural physical curves perfectly.
                     </p>
                     {% endif %}
                 </div>
             </div>
 
-            <div class="{% if analysis.stego_flags > 0 %}bg-red-950/20 border-t border-red-900/50{% else %}bg-emerald-950/20 border-t border-emerald-900/50{% endif %} p-6 md:p-8">
-                <div class="bg-[#050505] {% if analysis.stego_flags > 0 %}border-red-600/50 shadow-[0_0_35px_rgba(239,68,68,0.25)]{% else %}border-emerald-600/50 shadow-[0_0_35px_rgba(16,185,129,0.25)]{% endif %} border rounded p-6 text-center relative overflow-hidden">
-                    <div class="absolute inset-0 bg-gradient-to-b {% if analysis.stego_flags > 0 %}from-transparent via-red-500/10 to-transparent{% else %}from-transparent via-emerald-500/10 to-transparent{% endif %} w-full h-[200%] animate-scan pointer-events-none opacity-50 -top-full"></div>
-                    <h2 class="{% if analysis.stego_flags > 0 %}text-red-500{% else %}text-emerald-500{% endif %} text-xl md:text-2xl font-bold uppercase tracking-[0.2em] flex items-center justify-center gap-3">
-                        <i data-lucide="shield-alert" class="w-7 h-7 animate-pulse"></i>
+            <div class="{% if analysis.stego_flags > 0 %}bg-red-500/5 border-t border-red-500/20{% else %}bg-emerald-500/5 border-t border-emerald-500/20{% endif %} p-8 md:p-12 font-sans">
+                <div class="bg-zinc-950/90 {% if analysis.stego_flags > 0 %}border-red-500/40 shadow-[0_0_50px_rgba(239,68,68,0.2)]{% else %}border-emerald-500/40 shadow-[0_0_50px_rgba(16,185,129,0.2)]{% endif %} border rounded-2xl p-8 md:p-10 text-center relative overflow-hidden font-sans">
+                    <div class="absolute inset-0 bg-gradient-to-b {% if analysis.stego_flags > 0 %}from-transparent via-red-500/10 to-transparent{% else %}from-transparent via-emerald-500/10 to-transparent{% endif %} w-full h-[200%] animate-scan pointer-events-none opacity-60 -top-full font-sans"></div>
+                    <h2 class="{% if analysis.stego_flags > 0 %}text-red-500{% else %}text-emerald-500{% endif %} text-2xl md:text-3xl font-extrabold uppercase tracking-widest flex items-center justify-center gap-4 font-sans">
+                        <i data-lucide="shield-alert" class="w-8 h-8 animate-pulse font-sans"></i>
                         FINAL VERDICT: {% if analysis.stego_flags > 0 %}HIGH RISK{% else %}CLEAN (SAFE){% endif %}
-                        <i data-lucide="shield-alert" class="w-7 h-7 animate-pulse"></i>
+                        <i data-lucide="shield-alert" class="w-8 h-8 animate-pulse font-sans"></i>
                     </h2>
-                    <p class="{% if analysis.stego_flags > 0 %}text-red-400/80{% else %}text-emerald-400/80{% endif %} text-sm mt-3 font-bold tracking-widest uppercase">
+                    <p class="{% if analysis.stego_flags > 0 %}text-red-400/90{% else %}text-emerald-400/90{% endif %} text-sm md:text-base mt-4 font-bold tracking-wider uppercase font-mono font-mono">
                         [ {{ analysis.stego_flags }}/3 STATE-OF-THE-ART TESTS DETECTED STEGANOGRAPHY ]
                     </p>
                 </div>
