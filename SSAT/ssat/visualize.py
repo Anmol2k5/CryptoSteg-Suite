@@ -12,6 +12,9 @@ from datetime import datetime
 app = Flask(__name__)
 app.secret_key = os.urandom(32)
 
+UPLOAD_DIR = os.path.join(tempfile.gettempdir(), 'ssat_uploads')
+os.makedirs(UPLOAD_DIR, exist_ok=True)
+
 BATCH_RESULTS_FILE = os.path.join(os.path.dirname(__file__), '_batch_results.json')
 
 def _load_batch_results():
@@ -677,9 +680,131 @@ DASHBOARD_HTML = """
 </html>
 """
 
+SANITIZE_PAGE_HTML = """
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SSAT Sanitizer Core</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        cyber: { 950: '#083344', 900: '#164e63', 800: '#155e75', 500: '#06b6d4', 400: '#22d3ee' }
+                    },
+                    fontFamily: {
+                        sans: ['"Plus Jakarta Sans"', 'sans-serif'],
+                        mono: ['"JetBrains Mono"', 'monospace']
+                    }
+                }
+            }
+        }
+    </script>
+</head>
+<body class="bg-[#09090b] text-zinc-100 min-h-screen flex items-center justify-center p-6 font-sans antialiased selection:bg-cyan-500/30 selection:text-cyan-200">
+    <div class="max-w-xl w-full bg-zinc-900/80 border border-zinc-800 p-8 md:p-12 rounded-2xl shadow-2xl backdrop-blur-md">
+        <div class="flex items-center justify-center w-16 h-16 bg-cyan-500/10 border border-cyan-500/30 rounded-2xl text-cyan-400 mx-auto mb-6 shadow-lg shadow-cyan-500/10">
+            <i data-lucide="shield-check" class="w-8 h-8"></i>
+        </div>
+        <h2 class="text-2xl md:text-3xl font-extrabold text-white mb-3 text-center tracking-tight font-sans">Gateway Decontamination</h2>
+        <p class="text-zinc-400 text-sm mb-8 text-center leading-relaxed font-sans">
+            Because this forensic dashboard runs on a highly secure serverless runtime, temporary scan cache for <span class="text-cyan-400 font-mono font-bold bg-zinc-950 px-2.5 py-1 rounded-md border border-zinc-800">{{ filename }}</span> may have expired. Please re-upload the target image below to perform instant, bitwise LSB neutralization.
+        </p>
+        <form action="/sanitize" method="post" enctype="multipart/form-data" class="space-y-6">
+            <input type="hidden" name="orig_filename" value="{{ filename }}" />
+            <div>
+                <label class="group relative flex flex-col items-center justify-center w-full h-36 px-6 transition-all border-2 border-dashed border-zinc-700 rounded-xl bg-zinc-950/50 hover:bg-zinc-950 hover:border-cyan-500/60 cursor-pointer shadow-inner">
+                    <div class="flex flex-col items-center gap-2 text-zinc-500 group-hover:text-cyan-400 transition-colors">
+                        <i data-lucide="cloud-upload" class="w-8 h-8"></i>
+                        <span id="san-name" class="text-sm font-semibold tracking-wider font-sans text-zinc-300 group-hover:text-white transition-colors">Select target file to sanitize</span>
+                        <span class="text-xs text-zinc-600 font-mono">PNG, JPG, BMP accepted</span>
+                    </div>
+                    <input type="file" name="file" accept="image/*" required class="hidden" onchange="document.getElementById('san-name').innerText = this.files[0].name;" />
+                </label>
+            </div>
+            <div class="flex flex-col gap-2">
+                <label class="text-xs font-bold text-zinc-400 uppercase tracking-wider font-sans">Sanitization Level (Bit Depth)</label>
+                <select name="level" class="bg-zinc-950 text-cyan-300 px-4 py-3.5 rounded-xl border border-zinc-800 focus:outline-none focus:border-cyan-500 text-sm font-semibold font-mono">
+                    <option value="1">Level 1 (Purge 1 LSB — Minimal distortion)</option>
+                    <option value="2">Level 2 (Purge 2 LSBs — Aggressive scrubbing)</option>
+                </select>
+            </div>
+            <div class="flex gap-4 pt-2">
+                <a href="/" class="flex-1 px-6 py-4 rounded-xl border border-zinc-800 bg-zinc-950 hover:bg-zinc-800/80 text-zinc-300 text-sm font-bold uppercase tracking-wider text-center transition-all">Back to Dashboard</a>
+                <button type="submit" class="flex-1 px-6 py-4 rounded-xl border border-cyan-500/50 bg-gradient-to-r from-cyan-500/20 to-blue-500/20 hover:from-cyan-500/30 hover:to-blue-500/30 text-cyan-300 text-sm font-bold uppercase tracking-wider shadow-lg hover:shadow-cyan-500/20 transition-all flex items-center justify-center gap-2">
+                    <i data-lucide="zap" class="w-4 h-4"></i> Purge & Download
+                </button>
+            </div>
+        </form>
+    </div>
+    <script>
+        lucide.createIcons();
+    </script>
+</body>
+</html>
+"""
+
 @app.route('/')
 def index():
     return render_template_string(DASHBOARD_HTML, batch_results=_load_batch_results())
+
+@app.route('/sanitize', methods=['GET', 'POST'])
+def sanitize_endpoint():
+    from .sanitize import sanitize_image
+    os.makedirs(UPLOAD_DIR, exist_ok=True)
+
+    if request.method == 'POST':
+        if 'file' not in request.files:
+            return "No file uploaded", 400
+        file = request.files['file']
+        level = int(request.form.get('level', 1))
+        if not file or not file.filename:
+            return "Invalid file", 400
+
+        safe_fname = os.path.basename(file.filename)
+        in_path = os.path.join(UPLOAD_DIR, f"in_{safe_fname}")
+        out_path = os.path.join(UPLOAD_DIR, f"sanitized_{safe_fname}")
+
+        file.save(in_path)
+        try:
+            sanitize_image(in_path, out_path, level=level)
+            return send_file(out_path, as_attachment=True, download_name=f"sanitized_{safe_fname}")
+        finally:
+            if os.path.exists(in_path):
+                os.unlink(in_path)
+
+    # GET request
+    filename = request.args.get('filename', '')
+    if not filename:
+        return "No filename specified", 400
+
+    safe_fname = os.path.basename(filename)
+    candidates = [
+        os.path.join(UPLOAD_DIR, safe_fname),
+        os.path.join(os.path.dirname(__file__), safe_fname),
+        os.path.join(os.path.dirname(os.path.dirname(os.path.abspath(__file__))), safe_fname),
+    ]
+
+    found_path = None
+    for cand in candidates:
+        if os.path.exists(cand):
+            found_path = cand
+            break
+
+    level = int(request.args.get('level', 1))
+    if found_path:
+        out_path = os.path.join(UPLOAD_DIR, f"sanitized_{safe_fname}")
+        sanitize_image(found_path, out_path, level=level)
+        return send_file(out_path, as_attachment=True, download_name=f"sanitized_{safe_fname}")
+
+    return render_template_string(SANITIZE_PAGE_HTML, filename=safe_fname)
 
 @app.route('/bitplane', methods=['POST'])
 def bitplane_analysis():
@@ -748,6 +873,12 @@ def full_analysis():
 
     file = request.files['image']
     img_bytes = file.read()
+    if file and file.filename:
+        os.makedirs(UPLOAD_DIR, exist_ok=True)
+        safe_fname = os.path.basename(file.filename)
+        with open(os.path.join(UPLOAD_DIR, safe_fname), 'wb') as f:
+            f.write(img_bytes)
+
     img = cv2.imdecode(np.frombuffer(img_bytes, np.uint8), cv2.IMREAD_COLOR)
 
     if img is None:
@@ -812,6 +943,12 @@ def batch_scan():
             continue
 
         img_bytes = file.read()
+        if file and file.filename:
+            os.makedirs(UPLOAD_DIR, exist_ok=True)
+            safe_fname = os.path.basename(file.filename)
+            with open(os.path.join(UPLOAD_DIR, safe_fname), 'wb') as f:
+                f.write(img_bytes)
+
         sha256 = compute_sha256(img_bytes)
         file_size = f"{len(img_bytes) / 1024:.1f} KB"
 
