@@ -5,3 +5,6 @@ cryptography
 Pillow
 Flask
 matplotlib
+reportlab
+mcp
+python-docx

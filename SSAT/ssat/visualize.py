@@ -15,7 +15,7 @@ app.secret_key = os.urandom(32)
 UPLOAD_DIR = os.path.join(tempfile.gettempdir(), 'ssat_uploads')
 os.makedirs(UPLOAD_DIR, exist_ok=True)
 
-BATCH_RESULTS_FILE = os.path.join(os.path.dirname(__file__), '_batch_results.json')
+BATCH_RESULTS_FILE = os.path.join(tempfile.gettempdir(), '_ssat_batch_results.json')
 
 def _load_batch_results():
     if os.path.exists(BATCH_RESULTS_FILE):
@@ -30,7 +30,7 @@ def _save_batch_results(results):
     with open(BATCH_RESULTS_FILE, 'w') as f:
         json.dump(results, f)
 
-SINGLE_ANALYSIS_FILE = os.path.join(os.path.dirname(__file__), '_single_result.json')
+SINGLE_ANALYSIS_FILE = os.path.join(tempfile.gettempdir(), '_ssat_single_result.json')
 
 def _load_single_result():
     if os.path.exists(SINGLE_ANALYSIS_FILE):
@@ -53,9 +53,14 @@ def analyze_image_bytes(img_bytes: bytes) -> dict:
     if img is None:
         return None
 
-    with tempfile.NamedTemporaryFile(suffix='.png', delete=False) as tmp:
-        temp_path = tmp.name
-        cv2.imwrite(temp_path, img)
+    h, w = img.shape[:2]
+    if h > 500 or w > 500:
+        img = img[:min(h, 500), :min(w, 500)]
+
+    tmp = tempfile.NamedTemporaryFile(suffix='.png', delete=False)
+    tmp.close()
+    temp_path = tmp.name
+    cv2.imwrite(temp_path, img)
 
     try:
         from .analyze import chi_squared_test, sample_pair_analysis, rs_analysis
@@ -845,12 +850,14 @@ def entropy_analysis():
 
     from .analyze import generate_entropy_heatmap
 
-    with tempfile.NamedTemporaryFile(suffix='.png', delete=False) as tmp:
-        output_path = tmp.name
+    tmp = tempfile.NamedTemporaryFile(suffix='.png', delete=False)
+    tmp.close()
+    output_path = tmp.name
 
-    with tempfile.NamedTemporaryFile(suffix='.png', delete=False) as tmp_in:
-        in_path = tmp_in.name
-        cv2.imwrite(in_path, img)
+    tmp_in = tempfile.NamedTemporaryFile(suffix='.png', delete=False)
+    tmp_in.close()
+    in_path = tmp_in.name
+    cv2.imwrite(in_path, img)
 
     try:
         generate_entropy_heatmap(in_path, output_path, block_size)
@@ -884,9 +891,14 @@ def full_analysis():
     if img is None:
         return "Invalid image", 400
 
-    with tempfile.NamedTemporaryFile(suffix='.png', delete=False) as tmp:
-        temp_path = tmp.name
-        cv2.imwrite(temp_path, img)
+    h, w = img.shape[:2]
+    if h > 500 or w > 500:
+        img = img[:min(h, 500), :min(w, 500)]
+
+    tmp = tempfile.NamedTemporaryFile(suffix='.png', delete=False)
+    tmp.close()
+    temp_path = tmp.name
+    cv2.imwrite(temp_path, img)
 
     try:
         from .analyze import chi_squared_test, sample_pair_analysis, rs_analysis
@@ -1295,7 +1307,8 @@ def download_single_pdf():
     doc.build(elements)
     buf.seek(0)
 
-    return send_file(buf, mimetype='application/pdf', as_attachment=True, download_name=f'SSAT_Forensic_Report_{r["filename"]}_{datetime.now().strftime("%Y%m%d_%H%M%S")}.pdf')
+    safe_fname = "".join(c for c in os.path.basename(r["filename"]) if c.isalnum() or c in "._-")
+    return send_file(buf, mimetype='application/pdf', as_attachment=True, download_name=f'SSAT_Forensic_Report_{safe_fname}_{datetime.now().strftime("%Y%m%d_%H%M%S")}.pdf')
 
 def get_bit_plane(image_path: str, plane: int):
     img = cv2.imread(image_path, cv2.IMREAD_GRAYSCALE)
